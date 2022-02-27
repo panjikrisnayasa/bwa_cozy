@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../theme.dart';
 import '../widgets/city_item.dart';
+import '../widgets/space_item.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -17,63 +18,102 @@ class _HomeState extends State<Home> {
       backgroundColor: Colors.white,
       body: SafeArea(
         bottom: false,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Explore Now',
-                    style: mediumFont.copyWith(fontSize: 24),
-                  ),
-                  Text(
-                    'Find cozy place to stay',
-                    style: lightFont.copyWith(fontSize: 16, color: greyFont),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 30),
-                    child: Text(
-                      'Popular Area',
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          padding: const EdgeInsets.only(top: 30, bottom: 60),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Explore Now',
+                      style: mediumFont.copyWith(fontSize: 24),
+                    ),
+                    Text(
+                      'Find cozy place to stay',
+                      style: lightFont.copyWith(fontSize: 16, color: greyFont),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(top: 30),
+                      child: Text(
+                        'Popular Areas',
+                        style: regularFont.copyWith(fontSize: 16),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 16),
+                height: 165,
+                child: ListView(
+                  padding: const EdgeInsets.only(left: 30, right: 30),
+                  scrollDirection: Axis.horizontal,
+                  children: const [
+                    CityItem(
+                      city: 'Denpasar',
+                      imageUrl: 'https://picsum.photos/250?image=10',
+                    ),
+                    CityItem(
+                      city: 'Canggu',
+                      imageUrl: 'https://picsum.photos/250?image=11',
+                      isFavored: true,
+                    ),
+                    CityItem(
+                      city: 'Kuta',
+                      imageUrl: 'https://picsum.photos/250?image=12',
+                    ),
+                    CityItem(
+                      city: 'Ubud',
+                      imageUrl: 'https://picsum.photos/250?image=13',
+                    ),
+                    CityItem(
+                      city: 'Jimbaran',
+                      imageUrl: 'https://picsum.photos/250?image=14',
+                      isFavored: true,
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Recommended Spaces',
                       style: regularFont.copyWith(fontSize: 16),
                     ),
-                  ),
-                ],
+                    const SpaceItem(
+                      imageUrl: 'https://picsum.photos/250?image=20',
+                      rating: 4,
+                      name: 'Kuretakeso Hott',
+                      pricePerMonth: 52,
+                      city: 'Denpasar',
+                    ),
+                    const SpaceItem(
+                      imageUrl: 'https://picsum.photos/250?image=1',
+                      rating: 5,
+                      name: 'Roemah Nenek',
+                      pricePerMonth: 11,
+                      city: 'Canggu',
+                    ),
+                    const SpaceItem(
+                      imageUrl: 'https://picsum.photos/250?image=7',
+                      rating: 3,
+                      name: 'Darling How',
+                      pricePerMonth: 25,
+                      city: 'Ubud',
+                    )
+                  ],
+                ),
               ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 15),
-              height: 165,
-              child: ListView(
-                padding: const EdgeInsets.only(left: 30, right: 30),
-                scrollDirection: Axis.horizontal,
-                children: const [
-                  CityItem(
-                    cityName: 'Denpasar',
-                    imageUrl: 'https://picsum.photos/250?image=10',
-                  ),
-                  CityItem(
-                    cityName: 'Canggu',
-                    imageUrl: 'https://picsum.photos/250?image=11',
-                  ),
-                  CityItem(
-                    cityName: 'Kuta',
-                    imageUrl: 'https://picsum.photos/250?image=12',
-                  ),
-                  CityItem(
-                    cityName: 'Ubud',
-                    imageUrl: 'https://picsum.photos/250?image=13',
-                  ),
-                  CityItem(
-                    cityName: 'Jimbaran',
-                    imageUrl: 'https://picsum.photos/250?image=14',
-                  ),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
