@@ -2,15 +2,18 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../theme.dart';
+import 'favorite.dart';
 
 class CityItem extends StatelessWidget {
   final String imageUrl;
-  final String cityName;
+  final String city;
+  final bool isFavored;
 
   const CityItem({
     Key? key,
     required this.imageUrl,
-    required this.cityName,
+    required this.city,
+    this.isFavored = false,
   }) : super(key: key);
 
   @override
@@ -24,32 +27,37 @@ class CityItem extends StatelessWidget {
         color: cardColor,
       ),
       clipBehavior: Clip.antiAlias,
-      child: Column(
+      child: Stack(
         children: [
-          CachedNetworkImage(
-            imageUrl: imageUrl,
-            progressIndicatorBuilder: (context, url, downloadProgress) =>
-                Center(
-              child: Wrap(
-                children: const [CircularProgressIndicator()],
+          Column(
+            children: [
+              CachedNetworkImage(
+                imageUrl: imageUrl,
+                progressIndicatorBuilder: (context, url, downloadProgress) =>
+                    Center(
+                  child: Wrap(
+                    children: const [CircularProgressIndicator()],
+                  ),
+                ),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+                height: 115,
+                width: double.infinity,
+                fit: BoxFit.cover,
               ),
-            ),
-            errorWidget: (context, url, error) => const Icon(Icons.error),
-            height: 115,
-            width: double.infinity,
-            fit: BoxFit.cover,
+              Expanded(
+                child: Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  child: Text(
+                    city,
+                    style: mediumFont.copyWith(fontSize: 16),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ),
+            ],
           ),
-          Expanded(
-            child: Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Text(
-                cityName,
-                style: mediumFont.copyWith(fontSize: 16),
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-          )
+          Favorite(isFavored: isFavored),
         ],
       ),
     );
