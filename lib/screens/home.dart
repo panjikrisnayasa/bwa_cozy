@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../theme.dart';
 import '../widgets/city_item.dart';
-import '../widgets/navigator_item.dart';
+import '../widgets/floating_navigation.dart';
 import '../widgets/space_item.dart';
 import '../widgets/tips_guidances_item.dart';
 
@@ -15,6 +15,16 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _selectedNavigatorIndex = 0;
+
+  void _navigatorOnPressed(int index) {
+    setState(() {
+      _selectedNavigatorIndex = index;
+    });
+  }
+
+  bool _isNavigatorSelected(int index) {
+    return _selectedNavigatorIndex == index;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +50,9 @@ class _HomeState extends State<Home> {
                     Text(
                       'Find cozy place to stay',
                       style: lightFont.copyWith(
-                          fontSize: 16, color: darkGreyColor),
+                        fontSize: 16,
+                        color: darkGreyColor,
+                      ),
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 30),
@@ -147,40 +159,9 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      floatingActionButton: Wrap(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(23),
-              color: lightGreyColor,
-            ),
-            padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
-            margin: const EdgeInsets.symmetric(horizontal: 30),
-            child: Row(
-              children: const [
-                NavigatorItem(
-                  icon: 'assets/icons/home.svg',
-                  isSelected: true,
-                ),
-                Spacer(),
-                NavigatorItem(
-                  icon: 'assets/icons/mail.svg',
-                  isSelected: false,
-                ),
-                Spacer(),
-                NavigatorItem(
-                  icon: 'assets/icons/card.svg',
-                  isSelected: false,
-                ),
-                Spacer(),
-                NavigatorItem(
-                  icon: 'assets/icons/love.svg',
-                  isSelected: false,
-                ),
-              ],
-            ),
-          ),
-        ],
+      floatingActionButton: FloatingNavigation(
+        isNavigatorSelected: _isNavigatorSelected,
+        navigatorOnPressed: _navigatorOnPressed,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
