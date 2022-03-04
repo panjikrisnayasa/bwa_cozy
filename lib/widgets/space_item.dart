@@ -25,7 +25,8 @@ class SpaceItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 30),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         children: [
           Container(
@@ -72,7 +73,7 @@ class SpaceItem extends StatelessWidget {
                           text: ' / month',
                           style: lightFont.copyWith(
                             fontSize: 16,
-                            color: greyFont,
+                            color: darkGreyColor,
                           ),
                         ),
                       ]),
@@ -81,7 +82,7 @@ class SpaceItem extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 16),
                   child: Text(
                     city,
-                    style: lightFont.copyWith(color: greyFont),
+                    style: lightFont.copyWith(color: darkGreyColor),
                   ),
                 ),
               ],

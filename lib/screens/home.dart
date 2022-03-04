@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../theme.dart';
 import '../widgets/city_item.dart';
+import '../widgets/navigator_item.dart';
 import '../widgets/space_item.dart';
+import '../widgets/tips_guidances_item.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -12,6 +14,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int _selectedNavigatorIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +24,7 @@ class _HomeState extends State<Home> {
         bottom: false,
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
-          padding: const EdgeInsets.only(top: 30, bottom: 60),
+          padding: const EdgeInsets.only(top: 30, bottom: 140),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -35,7 +39,8 @@ class _HomeState extends State<Home> {
                     ),
                     Text(
                       'Find cozy place to stay',
-                      style: lightFont.copyWith(fontSize: 16, color: greyFont),
+                      style: lightFont.copyWith(
+                          fontSize: 16, color: darkGreyColor),
                     ),
                     Container(
                       margin: const EdgeInsets.only(top: 30),
@@ -80,35 +85,61 @@ class _HomeState extends State<Home> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
+                padding: const EdgeInsets.only(left: 30, top: 30),
+                child: Text(
+                  'Recommended Spaces',
+                  style: regularFont.copyWith(fontSize: 16),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 8),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Recommended Spaces',
-                      style: regularFont.copyWith(fontSize: 16),
-                    ),
-                    const SpaceItem(
+                  children: const [
+                    SpaceItem(
                       imageUrl: 'https://picsum.photos/250?image=20',
                       rating: 4,
                       name: 'Kuretakeso Hott',
                       pricePerMonth: 52,
                       city: 'Denpasar',
                     ),
-                    const SpaceItem(
+                    SpaceItem(
                       imageUrl: 'https://picsum.photos/250?image=1',
                       rating: 5,
                       name: 'Roemah Nenek',
                       pricePerMonth: 11,
                       city: 'Canggu',
                     ),
-                    const SpaceItem(
+                    SpaceItem(
                       imageUrl: 'https://picsum.photos/250?image=7',
                       rating: 3,
                       name: 'Darling How',
                       pricePerMonth: 25,
                       city: 'Ubud',
-                    )
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 22, left: 30),
+                child: Text(
+                  'Tips & Guidances',
+                  style: regularFont.copyWith(fontSize: 16),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 8),
+                child: Column(
+                  children: const [
+                    TipsGuidancesItem(
+                      image: 'assets/images/city_guidelines.jpeg',
+                      title: 'City Guidelines',
+                      lastUpdate: '20 Apr',
+                    ),
+                    TipsGuidancesItem(
+                      image: 'assets/images/jakarta_fairship.jpeg',
+                      title: 'Jakarta Fairship',
+                      lastUpdate: '11 Dec',
+                    ),
                   ],
                 ),
               ),
@@ -116,6 +147,42 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
+      floatingActionButton: Wrap(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(23),
+              color: lightGreyColor,
+            ),
+            padding: const EdgeInsets.only(left: 30, right: 30, top: 20),
+            margin: const EdgeInsets.symmetric(horizontal: 30),
+            child: Row(
+              children: const [
+                NavigatorItem(
+                  icon: 'assets/icons/home.svg',
+                  isSelected: true,
+                ),
+                Spacer(),
+                NavigatorItem(
+                  icon: 'assets/icons/mail.svg',
+                  isSelected: false,
+                ),
+                Spacer(),
+                NavigatorItem(
+                  icon: 'assets/icons/card.svg',
+                  isSelected: false,
+                ),
+                Spacer(),
+                NavigatorItem(
+                  icon: 'assets/icons/love.svg',
+                  isSelected: false,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

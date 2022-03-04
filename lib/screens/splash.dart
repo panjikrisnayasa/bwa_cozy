@@ -64,8 +64,8 @@ class _SplashState extends State<Splash> {
                       margin: const EdgeInsets.only(top: 10),
                       child: Text(
                         'Save your time and money here\nFind the best house to stay!',
-                        style:
-                            lightFont.copyWith(fontSize: 16, color: greyFont),
+                        style: lightFont.copyWith(
+                            fontSize: 16, color: darkGreyColor),
                       ),
                     ),
                     Container(
